@@ -8,10 +8,13 @@ function AutomaticReelSpeed:onUpdate(dt, isActiveForInput, isActiveForInputIgnor
         if turnedOnAnimation.name == "reelAnimation" and turnedOnAnimation.isTurnedOn then
             local lastSpeed = math.ceil(self:getLastSpeed())
             local workingSpeedLimit, isWorking = self:getSpeedLimit(true)
+			if workingSpeedLimit > 8 then
+				self:getSpeedLimit(8, isWorking)
+			end
             if not isWorking then
                 lastSpeed = 6
             elseif lastSpeed < 2 then
-                lastSpeed = 2
+                lastSpeed = 1
             elseif lastSpeed > 14 then
                 lastSpeed = 14
             end
